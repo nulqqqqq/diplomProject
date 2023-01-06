@@ -1,0 +1,30 @@
+﻿<Window x:Class="WpfApp1.Windows.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Windows"
+        mc:Ignorable="d"
+         Title="Registration" Height="600" Width="800" Icon="/Images/logo.png" Background="#E6DA76" Top="120" Left="50" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+    <StackPanel Margin="30, 10, 30, 10" Name="myregistration">
+        <Label Content="Registration" FontSize="32" HorizontalAlignment="Left" FontWeight="Bold"/>
+        <Label Content="Create new user" FontSize="24" HorizontalAlignment="Left" FontWeight="Bold"/>
+        <Label Content="Login" FontSize="24" Margin="0, 20, 0 , 0" FontFamily="Century Gothic"/>
+        <TextBox x:Name="RegLogin" Background="#C4C4C4" FontSize="30" Width="400" HorizontalAlignment="Left"/>
+        <Label Content="Password" FontSize="24" Margin="0, 20, 0 , 0" FontFamily="Century Gothic"/>
+        <PasswordBox x:Name="RegPassword" Background="#C4C4C4" FontSize="30" Width="400" HorizontalAlignment="Left"/>
+        <Label Content="Repeat password" FontSize="24" Margin="0, 20, 0 , 0" FontFamily="Century Gothic"/>
+        <PasswordBox x:Name="Reg2Password" Background="#C4C4C4" FontSize="30" Width="400" HorizontalAlignment="Left"/>
+        <Button x:Name="Done" Content="Done" Click="Done_Click" FontSize="32" Margin="10, -100" HorizontalAlignment="Right" Width="200" Height="60" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFE6B7B7" Offset="0.794"/>
+                    <GradientStop Color="#FFCB1212"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label Content="When entering or registering you accept the conditions" FontSize="20" Margin="0, 70, 0, 0" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
+        <Label Content="user agreement." FontSize="20" Margin="0, -10, 0, 0" FontWeight="Bold" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
+    </StackPanel>
+</Window>

@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfApp1.Windows.AdminApp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Windows"
+        mc:Ignorable="d"
+       Title="AdminApp" Height="600" Width="800" Icon="/Images/logo.png" Background="#E6DA76" Top="120" Left="50" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+    <Grid RenderTransformOrigin="0.562,0.447">
+        <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" Width="270" HorizontalAlignment="Left" Background="#FFF5E346" Margin="10" FontSize="16" FontFamily="Century Gothic">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="RestId" Binding="{Binding RestId}"/>
+                <DataGridTextColumn Header="RestName" Binding="{Binding RestName}"/>
+                <DataGridTextColumn Header="RestSourse" Binding="{Binding RestSourse}" MaxWidth="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="310,139,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="-0.112,-0.597" Height="40" Click="Add_Click" Loaded="Button_Loaded" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFE6B7B7" Offset="0.794"/>
+                    <GradientStop Color="#FFCB1212"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBox x:Name="IdText" HorizontalAlignment="Left" Height="45" Margin="443,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148"/>
+        <TextBox x:Name="NameText" HorizontalAlignment="Left" Height="45" Margin="443,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="425,139,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="Delete_Click" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFE6B7B7" Offset="0.794"/>
+                    <GradientStop Color="#FFCB1212"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Insert" HorizontalAlignment="Left" Margin="541,139,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="Insert_Click" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFE6B7B7" Offset="0.794"/>
+                    <GradientStop Color="#FFCB1212"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Image" HorizontalAlignment="Left" Margin="656,139,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click" Height="40" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFE6B7B7" Offset="0.794"/>
+                    <GradientStop Color="#FFCB1212"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label Content="RestId" HorizontalAlignment="Left" Margin="355,10,0,0" VerticalAlignment="Top" FontSize="25" FontFamily="Century Gothic"/>
+        <Label Content="RestName" HorizontalAlignment="Left" Margin="310,60,0,0" VerticalAlignment="Top" FontSize="25" RenderTransformOrigin="0.358,0.488" FontFamily="Century Gothic"/>
+    </Grid>
+
+</Window>

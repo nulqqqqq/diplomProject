@@ -1,0 +1,62 @@
+﻿<Window x:Class="WpfApp1.Windows.UserMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Windows"
+        mc:Ignorable="d"
+        Title="UserMain" Height="600" Width="800" Top="120" Left="50" WindowStartupLocation="CenterScreen" Visibility="Visible">
+    <Grid Background="#FFE2E2E2">
+        <Grid x:Name="panelHeader" VerticalAlignment="Top" Height="40" Background="#E6DA76">
+            <Image Source="/Images/logo.png" HorizontalAlignment="Center" Height="40" Margin="140,0,0,0"/>
+        </Grid>
+        <Grid x:Name="sidePanel" Background="#E6DA76" HorizontalAlignment="Left" Width="140">
+            <StackPanel>
+                <Grid Height="40" Background="#FFDEAF94">
+                </Grid>
+              
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="Black" BorderBrush="Transparent" Background="Transparent">
+                    <ListViewItem Height="30" FontWeight="Bold">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/icons/restaurant.png" Height="20" VerticalAlignment="Center"/>
+                            <Button x:Name="RestBtn" Content="Restaurants" Margin="19,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="RestBtn_Click"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="Black" BorderBrush="Transparent" Background="Transparent">
+                        <ListViewItem Height="30" FontWeight="Bold">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/icons/search.png" Height="20" VerticalAlignment="Center"/>
+                                <Button Content="Search" Margin="15,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="56" Click="Button_Click"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                    
+                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="Black" BorderBrush="Transparent" Background="Transparent">
+                        <ListViewItem Height="30" FontWeight="Bold">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/icons/basket.png" Height="20" VerticalAlignment="Center"/>
+                                <Button Content="OrderFood" Margin="15,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click_1"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+
+                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="Black" BorderBrush="Transparent" Background="Transparent">
+                        <ListViewItem Height="30" FontWeight="Bold">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/icons/basket.png" Height="20" VerticalAlignment="Center"/>
+                                <Button Content="Exit" Margin="15,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Exit_Click"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                </ListView>
+
+                
+            </StackPanel>
+        </Grid>
+        <Frame x:Name="main" Width="640" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="520" Background="#FF18434F" NavigationUIVisibility="Hidden"/>
+        <Image x:Name="logo" Source="/images/logo.png" Width="300" Margin="130,-100,0,0"/>
+        <TextBlock x:Name="name" HorizontalAlignment="Left" Margin="349,352,0,0" TextWrapping="Wrap" Text="You are logged in as" VerticalAlignment="Top" Foreground="White" FontFamily="Century Gothic" FontSize="20"/>
+        <TextBlock x:Name="userName" HorizontalAlignment="Left" Margin="435,382,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="White" FontFamily="Century Gothic" FontSize="20" Width="143"/>
+        <TextBlock x:Name="username" HorizontalAlignment="Left" Margin="41,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="Black" FontFamily="Century Gothic" FontSize="20" Width="99" Height="30" FontWeight="Bold"/>
+    </Grid>
+</Window>

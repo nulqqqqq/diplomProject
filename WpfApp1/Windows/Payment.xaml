@@ -1,0 +1,50 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Windows"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="WpfApp1.Windows.Payment"
+        mc:Ignorable="d"
+        Title="Payment" Height="600" Width="800" WindowStartupLocation="CenterScreen" >
+    <Grid>
+        <Grid x:Name="main">
+            <Rectangle HorizontalAlignment="Left" Height="352" Margin="49,68,0,0" Stroke="Black" VerticalAlignment="Top" Width="686">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF51785A" Offset="0"/>
+                        <GradientStop Color="#FFFFD6D6" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <xctk:MaskedTextBox x:Name="NameCard" Mask="0000-0000-0000-0000" HorizontalAlignment="Left" Height="55" Margin="248,124,0,0" TextWrapping="Wrap" Text="MaskedTextBox" VerticalAlignment="Top" Width="276" FontFamily="Century Gothic" FontWeight="Bold" BorderBrush="Black" SelectionBrush="Black" Background="White" Foreground="Black" PreviewTextInput="NameCard_PreviewTextInput" FontSize="24"/>
+            <TextBox x:Name="name" HorizontalAlignment="Left" MaxWidth="400" Height="45" Margin="248,346,0,0" TextWrapping="Wrap" Text="NAME_USERNAME" VerticalAlignment="Top" Width="276" PreviewMouseLeftButtonDown="Name_PreviewMouseLeftButtonDown" LostFocus="Name_LostFocus" BorderBrush="Black" PreviewTextInput="Name_PreviewTextInput" RenderTransformOrigin="1.575,1.583" FontSize="22" FontFamily="Century Gothic"/>
+            <TextBox x:Name="mounth" HorizontalAlignment="Left" Height="49" Margin="248,230,0,0" TextWrapping="Wrap" Text="mm" VerticalAlignment="Top" Width="90" LostFocus="Data_LostFocus" BorderBrush="Black" PreviewMouseLeftButtonDown="Mounth_PreviewMouseLeftButtonDown" PreviewTextInput="Mounth_PreviewTextInput" FontSize="24" FontFamily="Century Gothic"/>
+            <TextBox x:Name="years" HorizontalAlignment="Left" Height="49" Margin="431,230,0,0" TextWrapping="Wrap" Text="yy" VerticalAlignment="Top" Width="93" BorderBrush="Black" LostFocus="Years_LostFocus" PreviewMouseLeftButtonDown="Years_PreviewMouseLeftButtonDown" PreviewTextInput="Years_PreviewTextInput" FontSize="24" FontFamily="Century Gothic"/>
+            <Label Content="Number card" HorizontalAlignment="Left" Margin="248,80,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="24"/>
+            <Label Content="Validity" HorizontalAlignment="Left" Margin="249,184,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="24"/>
+            <Label Content="Name owner card" HorizontalAlignment="Left" Margin="248,299,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="24" Height="42" Width="287"/>
+        </Grid>
+        <RadioButton x:Name="nal" Content="Cash payment" HorizontalAlignment="Left" Margin="168,28,0,0" VerticalAlignment="Top" Height="21" Width="181" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18" Checked="Nal_Checked"/>
+        <RadioButton x:Name="card" Content="Card payment" HorizontalAlignment="Left" Margin="421,28,0,0" VerticalAlignment="Top" Height="21" Width="183" FontSize="18" FontFamily="Century Gothic" FontWeight="Bold" Checked="Card_Checked"/>
+        <Button Content="Accept" HorizontalAlignment="Left" Margin="488,447,0,0" VerticalAlignment="Top" Width="182" Height="78" FontSize="24" Click="Button_Click" FontFamily="Century Gothic" FontWeight="Bold" BorderBrush="Black">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFE6B7B7" Offset="0.794"/>
+                    <GradientStop Color="#FFCB1212"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <Button x:Name="none" Content="Cancel" HorizontalAlignment="Left" Margin="110,447,0,0" VerticalAlignment="Top" Width="182" Height="78" FontSize="24" Click="None_Click" FontFamily="Century Gothic" FontWeight="Bold" BorderBrush="Black">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFE6B7B7" Offset="0.794"/>
+                    <GradientStop Color="#FFCB1212"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+    </Grid>
+</Window>
