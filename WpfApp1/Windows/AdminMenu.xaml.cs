@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,13 +21,12 @@ namespace WpfApp1.Windows
     /// </summary>
     public partial class AdminMenu : Window
     {
-        UserContext db;
         public AdminMenu()
         {
             InitializeComponent();
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        private async void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -34,9 +35,8 @@ namespace WpfApp1.Windows
                 foods.FoodName = NameFood.Text;
                 foods.FoodCount = Convert.ToInt32(CountFood.Text);
                 foods.Price = Convert.ToInt32(Price.Text);
-                db.menu.Add(foods);
-                db.SaveChanges();
-                myDataGrid.ItemsSource = db.menu.ToList();
+                var request = await ServiceClass<Menu>.PostRequest("AddClick",foods);
+                myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Menu>>(request);
             }
             catch(Exception ex)
             {
@@ -46,27 +46,21 @@ namespace WpfApp1.Windows
 
         private void Button_Loaded(object sender, RoutedEventArgs e)
         {
-            db = new UserContext();
-            myDataGrid.ItemsSource = db.menu.ToList();
+            var request = ServiceClass<string>.GetRequest("GetMenu").Result;
+            myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Menu>>(request);
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 int Id = Convert.ToInt32(IdFood.Text);
-                var query = db.menu.Where(m => m.FoodId == Id).FirstOrDefault();
+
                 if (string.IsNullOrEmpty(CountFood.Text))
                 {
-                    db.menu.Remove(query);
+                    var request = await ServiceClass<int>.PostRequest("DeleteClick", Id);
+                    myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Menu>>(request);
                 }
-                else
-                {
-                    query.FoodCount -= Convert.ToInt32(CountFood.Text);
-                }
-
-                db.SaveChanges();
-                myDataGrid.ItemsSource = db.menu.ToList();
             }
             catch(Exception ex)
             {
@@ -75,48 +69,17 @@ namespace WpfApp1.Windows
             finally { }
         }
 
-        private void Insert_Click(object sender, RoutedEventArgs e)
+        private async void Update_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 int Id = Convert.ToInt32(IdFood.Text);
-                var query = db.menu.Where(m => m.FoodId == Id).FirstOrDefault();
-                if (string.IsNullOrEmpty(CountFood.Text) && string.IsNullOrEmpty(Price.Text))
-                {
-                    query.FoodName = NameFood.Text;
-                }
-                else if (string.IsNullOrEmpty(NameFood.Text) && string.IsNullOrEmpty(Price.Text))
-                {
-
-                    query.FoodCount = Convert.ToInt32(CountFood.Text);
-                }
-                else if (string.IsNullOrEmpty(CountFood.Text) && string.IsNullOrEmpty(NameFood.Text))
-                {
-                    query.Price = Convert.ToInt32(Price.Text);
-                }
-                else if (string.IsNullOrEmpty(CountFood.Text))
-                {
-                    query.FoodName = NameFood.Text;
-                    query.Price = Convert.ToInt32(Price.Text);
-                }
-                else if (string.IsNullOrEmpty(NameFood.Text))
-                {
-                    query.FoodCount = Convert.ToInt32(CountFood.Text);
-                    query.Price = Convert.ToInt32(Price.Text);
-                }
-                else if (string.IsNullOrEmpty(Price.Text))
-                {
-                    query.FoodName = NameFood.Text;
-                    query.FoodCount = Convert.ToInt32(CountFood.Text);
-                }
-                else
-                {
-                    query.FoodName = NameFood.Text;
-                    query.FoodCount = Convert.ToInt32(CountFood.Text);
-                    query.Price = Convert.ToInt32(Price.Text);
-                }
-                db.SaveChanges();
-                myDataGrid.ItemsSource = db.menu.ToList();
+                int countFood = !string.IsNullOrEmpty(CountFood.Text) ? Convert.ToInt32(CountFood.Text) : 0;
+                int priceFood = !string.IsNullOrEmpty(Price.Text) ? Convert.ToInt32(Price.Text) : 0;
+                string nameFood = !string.IsNullOrEmpty(NameFood.Text) ? NameFood.Text : "";
+                Menu menu = new Menu { FoodCount = countFood,Price = priceFood,FoodName = nameFood,FoodId = Id};
+                var request = await ServiceClass<Menu>.PostRequest("UpdateMenu", menu);
+                myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Menu>>(request);
             }
             catch(Exception ex)
             {
@@ -125,9 +88,9 @@ namespace WpfApp1.Windows
             finally { }
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void Window_KeyDown(object sender, KeyEventArgs exitKey)
         {
-            if (e.Key == Key.Escape)
+            if (exitKey.Key == Key.Escape)
             {
                 Admin admin = new Admin();
                 admin.Show();

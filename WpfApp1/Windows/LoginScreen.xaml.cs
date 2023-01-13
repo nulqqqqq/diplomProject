@@ -1,8 +1,12 @@
-﻿using System.Data.Entity;
+﻿using Newtonsoft.Json;
+using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
+using System;
 
 namespace WpfApp1.Windows
 {
@@ -11,71 +15,51 @@ namespace WpfApp1.Windows
     /// </summary>
     public partial class LoginScreen : Window
     {
-       
-        UserContext userDB;
-        int IdIccount;
         public static string name;
 
         public LoginScreen()
         {
-
             InitializeComponent();
-            userDB = new UserContext();
-            userDB.user.Load();
         }
 
-        private void Submit_Click(object sender, RoutedEventArgs e)
+        private async void Input_Click(object sender, RoutedEventArgs e)
         {
+            User user = new User { UserName = Login.Text, Password = Password.Password};
+            
+            var request = await ServiceClass<User>.PostRequest("LoginScreen",user);
+            
             if (!IsCorrectValue(Login.Text) || !IsCorrectValue(Password.Password))
             {
                 MessageBox.Show("Ошибка ввода");
             }
-            else if (!IsFoundAccount(Login.Text, Password.Password))
+            else if (request == "0")
             {
-                MessageBox.Show("Не найден логин и пароль. Убедитесь в корректности введённый данных");
+                MessageBox.Show("Не найден логин или пароль. Убедитесь в корректности введённых данных");
             }
             else
             {
-                if (this.IdIccount == 3)
+                if (request == "3")
                 {
-
                     Admin admin = new Admin();
                     admin.Show();
                     Close();
                     MessageBox.Show($"Вы зашли как администратор");
-
                 }
                 else
                 {
-
                     UserMain userMain = new UserMain();
+                    userMain.username.Text = user.UserName;
+                    userMain.name.Text += user.UserName;
                     userMain.Show();
                     Close();
-                    userMain.userName.Text = Name;
-                    userMain.username.Text = Name;
-                    UserMain.Id = IdIccount;
+                    UserMain.Id = JsonConvert.DeserializeObject<int>(request);
                 }
-
             }
         }
 
-        private bool IsFoundAccount(string login, string password)
+        private void Window_KeyDown(object sender, KeyEventArgs exitKey)
         {
-            foreach (var value in userDB.user.ToList())
-            {
-                if (login == value.UserName && password == value.Password)
-                {
-                    IdIccount = value.UserID;
-                    Name = value.UserName;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape)
+            if (exitKey.Key == Key.Escape)
             {
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();

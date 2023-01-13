@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,65 +22,56 @@ namespace WpfApp1.Pages
     public partial class Search : Page
     {
         public int id;
-        UserContext db;
         public Search()
         {
             InitializeComponent();
-            db = new UserContext();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Search_Restaurant_Click(object sender, RoutedEventArgs e)
         {
             search2.Items.Clear();
             search1.Items.Clear();
             string str = restText.Text;
-            var rest = db.restaurants.ToList();
-            var men = db.menu.ToList();
-            foreach(var item in rest)
+            var rest = ServiceClass<Restaurants>.GetRequest("GetRestaurants").Result;
+            var men = ServiceClass<string>.GetRequest("GetMenu").Result;
+            var menuDeserialized = JsonConvert.DeserializeObject<IEnumerable<Menu>>(men);
+            foreach (var item in JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(rest))
             {
                 if(item.RestName.IndexOf(str, StringComparison.OrdinalIgnoreCase)>=0)
                 {
                     search1.Items.Add(item.RestName);
                     id = item.RestId;
-                    var query = db.menu.ToList().Where(m => m.RestId == id).ToList();
+                    var query = menuDeserialized.Where(m => m.RestId == id).ToList();
                     foreach (var items in query)
                     {
                         search2.Items.Add(items.FoodName);
                     }
-
                 }
-            }
-            
-            
-           
+            }           
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Search_Food_Click(object sender, RoutedEventArgs e)
         {
             search2.Items.Clear();
             search1.Items.Clear();
             string str = foodText.Text;
-            var rest = db.restaurants.ToList();
-            var men = db.menu.ToList();
-            foreach(var item in men)
+            var rest = ServiceClass<Restaurants>.GetRequest("GetRestaurants").Result;
+            var men = JsonConvert.DeserializeObject<IEnumerable<Menu>>(rest);
+            var menuDeserialized = ServiceClass<string>.GetRequest("GetMenu").Result;
+            var restDeserialized = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(rest);
+            foreach (var item in men)
             {
                 if (item.FoodName.IndexOf(str, StringComparison.OrdinalIgnoreCase) >=0)
                 {
                     search1.Items.Add(item.FoodName);
                     id = item.RestId;
-                    var query = db.restaurants.ToList().Where(m => m.RestId == id).ToList();
+                    var query = restDeserialized.ToList().Where(m => m.RestId == id).ToList();
                     foreach (var items in query)
                     {
                         search2.Items.Add(items.RestName);
                     }
                 }
-            }
-            
-        }
-
-        private void search2_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            } 
         }
     }
 }

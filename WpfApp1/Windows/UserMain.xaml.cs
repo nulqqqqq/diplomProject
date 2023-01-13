@@ -17,55 +17,42 @@ using WpfApp1.Pages;
 
 namespace WpfApp1.Windows
 {
-
     public partial class UserMain : Window
     {
-        UserContext db;
         public static int Id;
         MainWindow mainWindow;
 
-
-
         public UserMain()
         {
-            db = new UserContext();
             InitializeComponent();
-           
-
-
         }
 
-        
-
-        private void RestBtn_Click(object sender, RoutedEventArgs e)
+        private void Show_Restaurants(object sender, RoutedEventArgs e)
         {
             name.Text = "";
-            userName.Text = "";
             logo.Height = 0;
             main.Content = new RestPage();
             
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Order_Food(object sender, RoutedEventArgs e)
         {
             name.Text = "";
-            userName.Text = "";
             logo.Height = 0;
             main.Content = new OrderFoods();
-
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow = new MainWindow();
+            OrderFoods.checking = false;
+            mainWindow = new MainWindow();  
             mainWindow.Show();
             Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Search(object sender, RoutedEventArgs e)
         {
             name.Text = "";
-            userName.Text = "";
             logo.Height = 0;
             main.Content = new Search();
         }

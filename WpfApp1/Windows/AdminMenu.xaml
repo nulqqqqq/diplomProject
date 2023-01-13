@@ -7,7 +7,7 @@
         mc:Ignorable="d"
          Title="AdminApp" Height="600" Width="800" Icon="/Images/logo.png" Background="#E6DA76" Top="120" Left="50" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
     <Grid RenderTransformOrigin="0.562,0.447">
-        <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" Width="364" HorizontalAlignment="Left" Background="#FFF5E346" Margin="10,10,0,10" FontSize="16" FontFamily="Century Gothic">
+        <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" Width="390" HorizontalAlignment="Left" Background="#FFF5E346" Margin="10,10,0,10" FontSize="16" FontFamily="Century Gothic">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="FoodId" Binding="{Binding FoodId}"/>
                 <DataGridTextColumn Header="FoodName" Binding="{Binding FoodName}"/>
@@ -16,12 +16,12 @@
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" MaxWidth="100"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="dataGrid" x:FieldModifier="public" AutoGenerateColumns="False" Width="239" HorizontalAlignment="Left" Background="#FFF5E346" Margin="478,334,0,10" FontSize="16" RenderTransformOrigin="0.5,0.5" FontFamily="Century Gothic">
+        <DataGrid x:Name="dataGrid" x:FieldModifier="public" AutoGenerateColumns="False" Width="359" HorizontalAlignment="Left" Background="#FFF5E346" Margin="418,334,0,10" FontSize="16" RenderTransformOrigin="0.5,0.5" FontFamily="Century Gothic">
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform AngleY="0.418"/>
-                    <RotateTransform/>
+                    <RotateTransform Angle="-0.431"/>
                     <TranslateTransform Y="0.993"/>
                 </TransformGroup>
             </DataGrid.RenderTransform>
@@ -52,7 +52,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Insert" HorizontalAlignment="Left" Margin="653,285,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="Insert_Click" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
+        <Button Content="Update" HorizontalAlignment="Left" Margin="653,285,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="Update_Click" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>

@@ -41,14 +41,14 @@ namespace WpfApp1.Windows
         {
             if (sub == true)
             {
-                Pages.OrderFoods.proverka = true;
+                Pages.OrderFoods.checking = true;
                 Close();
                 
             }
             else if (mounth.Text.Length == 2 && years.Text.Length == 2 && name.Text.Length > 2 && mouth == true && yer == true && nam == true)
             {
 
-                Pages.OrderFoods.proverka = true;
+                Pages.OrderFoods.checking = true;
                 sub = true;
                 
                 Close();

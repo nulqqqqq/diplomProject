@@ -7,10 +7,10 @@ namespace diplom.Models
         public UserContext(DbContextOptions<UserContext> options)
            : base(options) => Database.EnsureCreated();   
         
-            public virtual DbSet<RestaurantsModel> restaurants { get; set; }
-            public virtual DbSet<UserModel> users { get; set; }
-            public virtual DbSet<MenuModel> menu { get; set; }
-            public virtual DbSet<OrdersModel> orders { get; set; }
+            public virtual DbSet<RestaurantsModel> Restaurants { get; set; }
+            public virtual DbSet<UserModel> Users { get; set; }
+            public virtual DbSet<MenuModel> Menus { get; set; }
+            public virtual DbSet<OrdersModel> Orders { get; set; }
   
     }
 }

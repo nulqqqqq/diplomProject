@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Admin" Height="600" Width="800" Icon="/Images/logo.png" Background="#E6DA76" Top="120" Left="50" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
     <Grid>
-        <Button Content="Restaurants" HorizontalAlignment="Left" Margin="280,55,0,0" VerticalAlignment="Top" Width="174" Height="62" FontSize="24" FontFamily="Century Gothic" Click="Button_Click" FontWeight="Bold">
+        <Button Content="Restaurants" HorizontalAlignment="Left" Margin="280,55,0,0" VerticalAlignment="Top" Width="174" Height="62" FontSize="24" FontFamily="Century Gothic" Click="Show_Restaurants_Click" FontWeight="Bold">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -16,7 +16,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Menu" HorizontalAlignment="Left" Margin="280,141,0,0" VerticalAlignment="Top" Width="174" Height="62" FontSize="24" FontFamily="Century Gothic" Click="Button_Click_1" FontWeight="Bold">
+        <Button Content="Menu" HorizontalAlignment="Left" Margin="280,141,0,0" VerticalAlignment="Top" Width="174" Height="62" FontSize="24" FontFamily="Century Gothic" Click="Show_Menu_Click" FontWeight="Bold">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>

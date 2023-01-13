@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,33 +21,27 @@ namespace WpfApp1.Pages
     /// </summary>
     public partial class RestPage : Page
     {
-        UserContext db;
+        string item = ServiceClass<string>.GetRequest("GetRestaurants").Result;
         public RestPage()
         {
             InitializeComponent();
-            db = new UserContext();
-            db.restaurants.ToList();
             IsFoundResturant();
-
         }
 
         private void IsFoundResturant()
         {
-            foreach (var value in db.restaurants.ToList())
+            foreach (var value in JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(item))
             {
                 foreach (var control in grid.Children.OfType<Label>())
                 {
                     if (control.Content.ToString().Contains("RestName"))
                     {
                         control.Content = value.RestName;
-                        db.SaveChanges();
                         break;
-
                     }
 
 
                 }
-
 
                 foreach (Image img in grid.Children.OfType<Image>())
                 {
@@ -56,27 +51,13 @@ namespace WpfApp1.Pages
                         if (Convert.ToString(img.Source).Contains("ComingSoon"))
                         {
                             img.Source = new BitmapImage(new Uri(value.RestSourse));
-
-                            db.SaveChanges();
                             break;
-
                         }
 
                     }
-
-
                 }
-
-
-
-
-
-
             }
         }
-
-
-
     }
 }   
 
