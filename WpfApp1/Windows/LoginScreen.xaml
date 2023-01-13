@@ -13,7 +13,7 @@
         <TextBox x:Name="Login" Background="#C4C4C4" FontSize="30" Width="400" HorizontalAlignment="Left" FontFamily="Century Gothic" TextChanged="Login_TextChanged"/>
         <Label Content="Password" FontSize="24" Margin="0, 20, 0 , 0" FontFamily="Century Gothic"/>
         <PasswordBox x:Name="Password" Background="#C4C4C4" FontSize="30" Width="400" HorizontalAlignment="Left"/>
-        <Button x:Name="Submit" Content="Input" Click="Submit_Click" FontSize="32" Margin="10, 40" HorizontalAlignment="Right" Width="200" Height="60" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold">
+        <Button x:Name="Submit" Content="Input" Click="Input_Click" FontSize="32" Margin="10, 40" HorizontalAlignment="Right" Width="200" Height="60" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>

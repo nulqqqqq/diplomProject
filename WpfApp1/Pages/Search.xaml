@@ -14,7 +14,7 @@
         <Label Content="Restaurant" HorizontalAlignment="Left" Margin="76,62,0,0" VerticalAlignment="Top" Height="34" Width="112" FontSize="16" FontFamily="Century Gothic"/>
         <Label Content="Food" HorizontalAlignment="Left" Margin="310,62,0,0" VerticalAlignment="Top" Height="34" Width="86" FontSize="16" FontFamily="Century Gothic"/>
         <ListBox x:Name="search1" HorizontalAlignment="Left" Height="157" Margin="76,251,0,0" VerticalAlignment="Top" Width="226" Background="White" FontSize="16" FontFamily="Century Gothic"/>
-        <Button Content="Search" HorizontalAlignment="Left" Margin="73,136,0,0" VerticalAlignment="Top" Width="164" Height="51" Click="Button_Click" FontSize="16" FontFamily="Century Gothic" FontWeight="Bold" BorderThickness="1" Padding="0,1,1,1">
+        <Button Content="Search" HorizontalAlignment="Left" Margin="73,136,0,0" VerticalAlignment="Top" Width="164" Height="51" Click="Search_Restaurant_Click" FontSize="16" FontFamily="Century Gothic" FontWeight="Bold" BorderThickness="1" Padding="0,1,1,1">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -24,7 +24,7 @@
             </Button.Background>
         </Button>
         <ListBox x:Name="search2" HorizontalAlignment="Left" Height="157" Margin="302,251,0,0" VerticalAlignment="Top" Width="226" Background="White" FontFamily="Century Gothic" FontSize="16"/>
-        <Button Content="Search" HorizontalAlignment="Left" Margin="307,136,0,0" VerticalAlignment="Top" Width="165" Height="51" Click="Button_Click_1" FontSize="16" FontFamily="Century Gothic" FontWeight="Bold">
+        <Button Content="Search" HorizontalAlignment="Left" Margin="307,136,0,0" VerticalAlignment="Top" Width="165" Height="51" Click="Search_Food_Click" FontSize="16" FontFamily="Century Gothic" FontWeight="Bold">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>

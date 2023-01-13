@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace WpfApp1.Windows
 {
@@ -20,31 +22,28 @@ namespace WpfApp1.Windows
     /// </summary>
     public partial class AdminApp : Window
     {
-        UserContext db;
         AdminMenu adminMenu;
         public AdminApp()
         {
             InitializeComponent();
-            
         }
 
-        private void Button_Loaded(object sender, RoutedEventArgs e)
+        private async void Button_Loaded(object sender, RoutedEventArgs e)
         {
-            db = new UserContext();
             adminMenu = new AdminMenu();
-            myDataGrid.ItemsSource = db.restaurants.ToList();
+            var request = ServiceClass<string>.GetRequest("GetRestaurants").Result;
+            myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        private async void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 Restaurants rest = new Restaurants();
                 rest.RestName = NameText.Text;
-                db.restaurants.Add(rest);
-                db.SaveChanges();
-                myDataGrid.ItemsSource = db.restaurants.ToList();
-                adminMenu.dataGrid.ItemsSource = db.restaurants.ToList();
+                var request = await ServiceClass<Restaurants>.PostRequest("AdminApp", rest);
+                myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
+                adminMenu.dataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
             }
             catch (Exception ex)
             {
@@ -53,16 +52,14 @@ namespace WpfApp1.Windows
             finally { }
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 int Id = Convert.ToInt32(IdText.Text);
-                var query = db.restaurants.Where(m => m.RestId == Id).FirstOrDefault();
-                db.restaurants.Remove(query);
-                db.SaveChanges();
-                myDataGrid.ItemsSource = db.restaurants.ToList();
-                adminMenu.dataGrid.ItemsSource = db.restaurants.ToList();
+                var request = await ServiceClass<int>.PostRequest("DeleteRestaurant", Id);
+                myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
+                adminMenu.dataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
             }
             catch (Exception ex)
             {
@@ -71,16 +68,16 @@ namespace WpfApp1.Windows
             finally { }
         }
 
-        private void Insert_Click(object sender, RoutedEventArgs e)
+        private async void Update_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                int Id = Convert.ToInt32(IdText.Text);
-                var query = db.restaurants.Where(m => m.RestId == Id).FirstOrDefault();
-                query.RestName = NameText.Text;
-                db.SaveChanges();
-                myDataGrid.ItemsSource = db.restaurants.ToList();
-                adminMenu.dataGrid.ItemsSource = db.restaurants.ToList();
+                Restaurants restaurants = new Restaurants();
+                restaurants.RestName = NameText.Text;
+                restaurants.RestId = Convert.ToInt32(IdText.Text);
+                var request = await ServiceClass<Restaurants>.PostRequest("Update", restaurants);
+                myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
+                adminMenu.dataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
             }
             catch (Exception ex)
             {
@@ -89,21 +86,21 @@ namespace WpfApp1.Windows
             finally { }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Select_Image_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 OpenFileDialog file = new OpenFileDialog();
                 if (file.ShowDialog() == true)
                 {
-                    string src = file.FileName;
+                    Restaurants restaurants = new Restaurants();
+                    string fileName = file.FileName;
                     int Id = Convert.ToInt32(IdText.Text);
-                    var query = db.restaurants.Where(m => m.RestId == Id).FirstOrDefault();
-                    query.RestSourse = src;
-                    db.SaveChanges();
-                    myDataGrid.ItemsSource = db.restaurants.ToList();
-                    adminMenu.dataGrid.ItemsSource = db.restaurants.ToList();
-
+                    restaurants.RestSourse = fileName;
+                    restaurants.RestId = Id;
+                    var request = await ServiceClass<Restaurants>.PostRequest("AddImage",restaurants);
+                    myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
+                    adminMenu.dataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
                 }
 
             }
@@ -114,14 +111,19 @@ namespace WpfApp1.Windows
             finally { }
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void Window_KeyDown(object sender, KeyEventArgs exitKey)
         {
-            if (e.Key == Key.Escape)
+            if (exitKey.Key == Key.Escape)
             {
                 Admin admin = new Admin();
                 admin.Show();
                 Close();
             }
+        }
+
+        private void myDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

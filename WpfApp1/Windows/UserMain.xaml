@@ -14,28 +14,28 @@
             <StackPanel>
                 <Grid Height="40" Background="#FFDEAF94">
                 </Grid>
-              
+
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="Black" BorderBrush="Transparent" Background="Transparent">
                     <ListViewItem Height="30" FontWeight="Bold">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/icons/restaurant.png" Height="20" VerticalAlignment="Center"/>
-                            <Button x:Name="RestBtn" Content="Restaurants" Margin="19,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="RestBtn_Click"/>
+                            <Button x:Name="RestBtn" Content="Restaurants" Margin="19,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Show_Restaurants"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="Black" BorderBrush="Transparent" Background="Transparent">
                         <ListViewItem Height="30" FontWeight="Bold">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/icons/search.png" Height="20" VerticalAlignment="Center"/>
-                                <Button Content="Search" Margin="15,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="56" Click="Button_Click"/>
+                                <Button Content="Search" Margin="15,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="56" Click="Search"/>
                             </StackPanel>
                         </ListViewItem>
                     </ListView>
-                    
+
                     <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontFamily="Century Gothic" FontSize="14" Foreground="Black" BorderBrush="Transparent" Background="Transparent">
                         <ListViewItem Height="30" FontWeight="Bold">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/icons/basket.png" Height="20" VerticalAlignment="Center"/>
-                                <Button Content="OrderFood" Margin="15,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click_1"/>
+                                <Button Content="OrderFood" Margin="15,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="Order_Food"/>
                             </StackPanel>
                         </ListViewItem>
                     </ListView>
@@ -50,13 +50,12 @@
                     </ListView>
                 </ListView>
 
-                
+
             </StackPanel>
         </Grid>
         <Frame x:Name="main" Width="640" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="520" Background="#FF18434F" NavigationUIVisibility="Hidden"/>
         <Image x:Name="logo" Source="/images/logo.png" Width="300" Margin="130,-100,0,0"/>
-        <TextBlock x:Name="name" HorizontalAlignment="Left" Margin="349,352,0,0" TextWrapping="Wrap" Text="You are logged in as" VerticalAlignment="Top" Foreground="White" FontFamily="Century Gothic" FontSize="20"/>
-        <TextBlock x:Name="userName" HorizontalAlignment="Left" Margin="435,382,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="White" FontFamily="Century Gothic" FontSize="20" Width="143"/>
+        <TextBlock x:Name="name" HorizontalAlignment="Left" Margin="315,354,0,0" TextWrapping="Wrap" Text="You are logged in as: " VerticalAlignment="Top" Foreground="White" FontFamily="Century Gothic" FontSize="20"/>
         <TextBlock x:Name="username" HorizontalAlignment="Left" Margin="41,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="Black" FontFamily="Century Gothic" FontSize="20" Width="99" Height="30" FontWeight="Bold"/>
     </Grid>
 </Window>

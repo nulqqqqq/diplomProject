@@ -14,15 +14,16 @@
         }
 
         public virtual DbSet<Restaurants> restaurants { get; set; }
-        public virtual DbSet<User> user { get; set; }
-        public virtual DbSet<Menu> menu { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Orders> orders { get; set; }
 
     }
 
     public class User
     {
-        public int UserID { get; set; }
+        [Key]
+        public int UserModelId { get; set; }
 
         public string UserName { get; set; }
 
@@ -66,10 +67,4 @@
 
         public string Adress { get; set; }
     }
-
-   
-
-
-
-
 }

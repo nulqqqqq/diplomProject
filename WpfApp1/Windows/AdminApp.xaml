@@ -34,7 +34,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Insert" HorizontalAlignment="Left" Margin="541,139,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="Insert_Click" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
+        <Button Content="Update" HorizontalAlignment="Left" Margin="541,139,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="Update_Click" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -43,7 +43,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Image" HorizontalAlignment="Left" Margin="656,139,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click" Height="40" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
+        <Button Content="Image" HorizontalAlignment="Left" Margin="656,139,0,0" VerticalAlignment="Top" Width="100" Click="Select_Image_Click" Height="40" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>

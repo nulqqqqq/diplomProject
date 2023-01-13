@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800" Background="#E6DA76" Icon="/Images/logo.png" Top="120" Left="50" WindowStartupLocation="CenterScreen">
     <StackPanel Margin="0, 10, 0, 0" RenderTransformOrigin="0.498,0.506">
-        <Label Content="Добро пожаловать" FontSize="32" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Century Gothic" Margin="-10,0,0,0"/>
+        <Label Content="Welcome&#xD;&#xA;" FontSize="32" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Century Gothic" Margin="-10,0,0,0" Height="62" RenderTransformOrigin="0.491,0.53"/>
         <Label Content="" FontSize="32" HorizontalAlignment="Center" FontWeight="Bold" Margin="-50, -10, 150, 0"/>
         <Image Source="/Images/logo.png" Width="150" Margin="-20,-40,0,0"/>
-        <Button x:Name="Log" Content="Вход" Click="Log_Click" FontSize="32" Margin="0, 70" HorizontalAlignment="Center" Width="240" Height="70" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" Foreground="Black">
+        <Button x:Name="Log" Content="Enter" Click="Login_Click" FontSize="32" Margin="0, 70" HorizontalAlignment="Center" Width="240" Height="70" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold" Foreground="Black">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -19,7 +19,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="Reg" Content="Регистрация" Click="Reg_Click" FontSize="32" Margin="0, -20" HorizontalAlignment="Center" Width="240" Height="70" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold">
+        <Button x:Name="Reg" Content="Registration" Click="Registration_Click" FontSize="32" Margin="0, -20" HorizontalAlignment="Center" Width="240" Height="70" BorderBrush="Black" FontFamily="Century Gothic" FontWeight="Bold">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>

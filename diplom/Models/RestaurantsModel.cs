@@ -8,9 +8,9 @@ namespace diplom.Models
         [Key]
         public int RestId { get; set; }
 
-        public string RestName { get; set; }
+        public string? RestName { get; set; }
 
-        public string RestSourse { get; set; }
+        public string? RestSourse { get; set; }
 
     }
 }
