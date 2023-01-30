@@ -46,14 +46,17 @@ namespace WpfApp1.Windows
 
         private async void Done_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsCorrectValue(RegLogin.Text) || !IsCorrectValue(RegPassword.Password) ||
-               !IsCorrectValue(Reg2Password.Password))
+            if (!IsCorrectValue(RegLogin.Text))
             {
-                MessageBox.Show("Ошибка ввода!");
+                MessageBox.Show("Логин должен быть от 4 до 16 символов!");
+            }
+            else if(!IsCorrectValue(RegPassword.Password))
+            {
+                MessageBox.Show("Пароль должен быть от 4 до 16 символов!");
             }
             else if (RegPassword.Password != Reg2Password.Password)
             {
-                MessageBox.Show("Пароли не соответствуют друг другу!");
+                MessageBox.Show("Пароли не совпадают!");
             }
             else
             {

@@ -22,6 +22,7 @@ namespace WpfApp1.Windows
     /// </summary>
     public partial class AdminApp : Window
     {
+        
         AdminMenu adminMenu;
         public AdminApp()
         {
@@ -41,7 +42,7 @@ namespace WpfApp1.Windows
             {
                 Restaurants rest = new Restaurants();
                 rest.RestName = NameText.Text;
-                var request = await ServiceClass<Restaurants>.PostRequest("AdminApp", rest);
+                var request = await ServiceClass<Restaurants>.PostRequest("AddRestClick", rest);
                 myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
                 adminMenu.dataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
             }
@@ -49,7 +50,6 @@ namespace WpfApp1.Windows
             {
                 MessageBox.Show(ex.Message);
             }
-            finally { }
         }
 
         private async void Delete_Click(object sender, RoutedEventArgs e)
@@ -57,15 +57,15 @@ namespace WpfApp1.Windows
             try
             {
                 int Id = Convert.ToInt32(IdText.Text);
-                var request = await ServiceClass<int>.PostRequest("DeleteRestaurant", Id);
-                myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
-                adminMenu.dataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
+                var result = await ServiceClass<int>.PostRequest("DeleteRestaurant", Id);
+                var listOfRestaurants = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(result);
+                myDataGrid.ItemsSource = listOfRestaurants;
+                adminMenu.dataGrid.ItemsSource = listOfRestaurants;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            finally { }
         }
 
         private async void Update_Click(object sender, RoutedEventArgs e)
@@ -75,15 +75,15 @@ namespace WpfApp1.Windows
                 Restaurants restaurants = new Restaurants();
                 restaurants.RestName = NameText.Text;
                 restaurants.RestId = Convert.ToInt32(IdText.Text);
-                var request = await ServiceClass<Restaurants>.PostRequest("Update", restaurants);
-                myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
-                adminMenu.dataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
+                var result = await ServiceClass<Restaurants>.PostRequest("Update", restaurants);
+                var listOfRestaurants = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(result);
+                myDataGrid.ItemsSource = listOfRestaurants;
+                adminMenu.dataGrid.ItemsSource = listOfRestaurants;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            finally { }
         }
 
         private async void Select_Image_Click(object sender, RoutedEventArgs e)
@@ -98,17 +98,16 @@ namespace WpfApp1.Windows
                     int Id = Convert.ToInt32(IdText.Text);
                     restaurants.RestSourse = fileName;
                     restaurants.RestId = Id;
-                    var request = await ServiceClass<Restaurants>.PostRequest("AddImage",restaurants);
-                    myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
-                    adminMenu.dataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(request);
+                    var result = await ServiceClass<Restaurants>.PostRequest("AddImage",restaurants);
+                    var listOfRestaurants = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(result);
+                    myDataGrid.ItemsSource = listOfRestaurants;
+                    adminMenu.dataGrid.ItemsSource = listOfRestaurants;
                 }
-
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            finally { }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs exitKey)

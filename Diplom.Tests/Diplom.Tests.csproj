@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Diplom.Domain.Core\Diplom.Domain.Core.csproj" />
+    <ProjectReference Include="..\Diplom.Domain.Interfaces\Diplom.Domain.Interfaces.csproj" />
+    <ProjectReference Include="..\Diplom.Infrastructure.Buisness\Diplom.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\DiplomServer\Server.csproj" />
+    <ProjectReference Include="..\WpfApp1\UserInterface.csproj" />
+  </ItemGroup>
+
+</Project>

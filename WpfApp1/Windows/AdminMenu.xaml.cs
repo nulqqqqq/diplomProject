@@ -21,6 +21,7 @@ namespace WpfApp1.Windows
     /// </summary>
     public partial class AdminMenu : Window
     {
+        int idUser;
         public AdminMenu()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace WpfApp1.Windows
                 foods.FoodName = NameFood.Text;
                 foods.FoodCount = Convert.ToInt32(CountFood.Text);
                 foods.Price = Convert.ToInt32(Price.Text);
-                var request = await ServiceClass<Menu>.PostRequest("AddClick",foods);
+                var request = await ServiceClass<Menu>.PostRequest("AddFood", foods);
                 myDataGrid.ItemsSource = JsonConvert.DeserializeObject<IEnumerable<Menu>>(request);
             }
             catch(Exception ex)
@@ -66,7 +67,6 @@ namespace WpfApp1.Windows
             {
                 MessageBox.Show(ex.Message);
             }
-            finally { }
         }
 
         private async void Update_Click(object sender, RoutedEventArgs e)

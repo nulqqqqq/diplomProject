@@ -56,19 +56,19 @@ namespace WpfApp1.Pages
             search1.Items.Clear();
             string str = foodText.Text;
             var rest = ServiceClass<Restaurants>.GetRequest("GetRestaurants").Result;
-            var men = JsonConvert.DeserializeObject<IEnumerable<Menu>>(rest);
-            var menuDeserialized = ServiceClass<string>.GetRequest("GetMenu").Result;
             var restDeserialized = JsonConvert.DeserializeObject<IEnumerable<Restaurants>>(rest);
-            foreach (var item in men)
+            var men = ServiceClass<string>.GetRequest("GetMenu").Result;
+            var menuDeserialized = JsonConvert.DeserializeObject<IEnumerable<Menu>>(men);
+            foreach (var item in menuDeserialized)
             {
                 if (item.FoodName.IndexOf(str, StringComparison.OrdinalIgnoreCase) >=0)
                 {
-                    search1.Items.Add(item.FoodName);
+                    search2.Items.Add(item.FoodName);
                     id = item.RestId;
                     var query = restDeserialized.ToList().Where(m => m.RestId == id).ToList();
                     foreach (var items in query)
                     {
-                        search2.Items.Add(items.RestName);
+                        search1.Items.Add(items.RestName);
                     }
                 }
             } 

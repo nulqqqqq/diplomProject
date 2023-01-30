@@ -10,19 +10,23 @@ namespace WpfApp1
 {
     public class ServiceClass<T>
     {
-        private static readonly HttpClient client = new HttpClient();
         public static async Task<string> PostRequest(string url, T value)
         {
-            var response = await client.PostAsync($"https://localhost:7231/{url}", new StringContent(
-                    JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json"));
-            var contents = await response.Content.ReadAsStringAsync();
-            return contents;
+            using (var httpclient = new HttpClient())
+            {
+                var response = await httpclient.PostAsJsonAsync($"http://localhost:5253/{url}",value);
+                var result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
         }
         public static async Task<string> GetRequest(string url)
         {
-            var response = client.GetAsync($"https://localhost:7231/{url}").Result;
-            var contents = response.Content.ReadAsStringAsync().Result;
-            return contents;
+            using (var httpclient = new HttpClient())
+            {
+                var response = httpclient.GetAsync($"http://localhost:5253/{url}").Result;
+                var contents = response.Content.ReadAsStringAsync().Result;
+                return contents;
+            }
         }
     }
     

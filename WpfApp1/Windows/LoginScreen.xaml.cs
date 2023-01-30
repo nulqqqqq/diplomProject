@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System.Data.Entity;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using System;
 
 namespace WpfApp1.Windows
 {
@@ -25,36 +21,41 @@ namespace WpfApp1.Windows
         private async void Input_Click(object sender, RoutedEventArgs e)
         {
             User user = new User { UserName = Login.Text, Password = Password.Password};
-            
-            var request = await ServiceClass<User>.PostRequest("LoginScreen",user);
-            
-            if (!IsCorrectValue(Login.Text) || !IsCorrectValue(Password.Password))
+
+            using (var httpclient = new HttpClient())
             {
-                MessageBox.Show("Ошибка ввода");
-            }
-            else if (request == "0")
-            {
-                MessageBox.Show("Не найден логин или пароль. Убедитесь в корректности введённых данных");
-            }
-            else
-            {
-                if (request == "3")
+                var request = await httpclient.PostAsJsonAsync("http://localhost:5253/LoginScreen", user);
+                int result = await request.Content.ReadAsAsync<int>();
+                if (!IsCorrectValue(Login.Text) || !IsCorrectValue(Password.Password))
                 {
-                    Admin admin = new Admin();
-                    admin.Show();
-                    Close();
-                    MessageBox.Show($"Вы зашли как администратор");
+                    MessageBox.Show("Ошибка ввода");
+                }
+                else if (result == 0)
+                {
+                    MessageBox.Show("Не найден логин или пароль. Убедитесь в корректности введённых данных");
                 }
                 else
                 {
-                    UserMain userMain = new UserMain();
-                    userMain.username.Text = user.UserName;
-                    userMain.name.Text += user.UserName;
-                    userMain.Show();
-                    Close();
-                    UserMain.Id = JsonConvert.DeserializeObject<int>(request);
+                    if (result == 3)
+                    {
+                        Admin admin = new Admin();
+                        admin.Show();
+                        Close();
+                        MessageBox.Show($"Вы зашли как администратор");
+                    }
+                    else
+                    {
+                        UserMain userMain = new UserMain();
+                        userMain.username.Text = user.UserName;
+                        userMain.name.Text += user.UserName;
+                        userMain.Show();
+                        Close();
+                        UserMain.Id = result;
+                    }
                 }
             }
+
+            
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs exitKey)
