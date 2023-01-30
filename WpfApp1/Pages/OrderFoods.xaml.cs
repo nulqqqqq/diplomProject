@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.IO;
 using Newtonsoft.Json;
 using System.Net.Http;
-
+using System.Threading;
 
 namespace WpfApp1.Pages
 {
@@ -48,22 +48,6 @@ namespace WpfApp1.Pages
             {
                 restDictionary.Add(it.RestId, it.RestName);
                 restNameList.Items.Add(it.RestName);
-            }
-        }
-
-        private void Select_Restaurant(object sender, RoutedEventArgs e)
-        {
-            menuDictionary.Clear();
-            var item = ServiceClass<string>.GetRequest("GetMenu").Result;
-            var lid = restNameList.SelectedItem;
-            
-            foreach (var qw in JsonConvert.DeserializeObject<IEnumerable<Menu>>(item))                                                     
-            {
-                if(lid == restDictionary[qw.RestId])
-                {
-                    menuDictionary.Add(qw.FoodId,$"{qw.FoodName} - {qw.Price}$");
-                    foodName.Items.Add(menuDictionary[qw.FoodId]);
-                }
             }
         }
 
@@ -142,6 +126,17 @@ namespace WpfApp1.Pages
                         write.WriteLine($"The price for the entire order is: {price}$");
                     }
                     CurrentOrder.Items.Clear();
+                    Thread.Sleep(1000);
+                    if (checking == true)
+                    {
+                        using (var read = new StreamReader(Path))
+                        {
+                            var str = read.ReadToEnd();
+                            windowCheck = new Windows.Check();
+                            windowCheck.Show();
+                            windowCheck.check.Text = str.ToString();
+                        }
+                    }
                 }
             }
         }
@@ -150,17 +145,26 @@ namespace WpfApp1.Pages
         {
             CurrentOrder.Items.Remove(CurrentOrder.SelectedItem);
         }
-        private void Check(object sender, RoutedEventArgs e)
+
+        private void restNameList_Selected(object sender, SelectionChangedEventArgs e)
         {
-            if (checking == true)
+            foodName.Items.Clear();
+            menuDictionary.Clear();
+            var item = ServiceClass<string>.GetRequest("GetMenu").Result;
+            var lid = restNameList.SelectedItem;
+            string outParametr;
+
+            foreach (var qw in JsonConvert.DeserializeObject<IEnumerable<Menu>>(item))
             {
-                using (var read = new StreamReader(Path))
+                if (restDictionary.TryGetValue(qw.RestId, out outParametr))
                 {
-                    var str = read.ReadToEnd();
-                    windowCheck = new Windows.Check();
-                    windowCheck.Show();
-                    windowCheck.check.Text = str.ToString();
+                    if (lid == outParametr)
+                    {
+                        menuDictionary.Add(qw.FoodId, $"{qw.FoodName} - {qw.Price}$");
+                        foodName.Items.Add(menuDictionary[qw.FoodId]);
+                    }
                 }
+                
             }
         }
     }

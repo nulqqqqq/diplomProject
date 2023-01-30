@@ -59,8 +59,9 @@ namespace diplom.Controllers
         }
         [HttpPost]
         [Route("Update")]
-        public async Task<List<RestaurantsModel>> Update()
+        public async Task<List<RestaurantsModel>> Update(int restaurants)
         {
+            int xuy = restaurants;
             using StreamReader reader = new StreamReader(HttpContext.Request.Body);
             string restId = await reader.ReadToEndAsync();
             var rest = JsonConvert.DeserializeObject<RestaurantsModel>(restId);
