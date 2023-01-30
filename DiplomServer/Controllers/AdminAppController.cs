@@ -10,6 +10,7 @@ namespace DiplomServer.Controllers
         public AdminAppController(IAdminApp adminApp)
         {
             _adminApp = adminApp;
+
         }
 
         [HttpPost]
